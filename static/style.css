@@ -1,0 +1,152 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 2.5em;
+}
+
+.player-info {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.player-x {
+    color: #3498db;
+    font-weight: bold;
+}
+
+.player-o {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-gap: 10px;
+    margin: 20px auto;
+    width: fit-content;
+}
+
+.cell {
+    width: 120px;
+    height: 120px;
+    background: #f8f9fa;
+    border: 3px solid #e0e0e0;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cell:hover {
+    background: #e8e9ea;
+    transform: scale(1.05);
+}
+
+.cell.x {
+    color: #3498db;
+}
+
+.cell.o {
+    color: #e74c3c;
+}
+
+.cell.winning {
+    background: #ffd700;
+    animation: pulse 0.5s ease-in-out;
+}
+
+.cell.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.message {
+    margin: 20px 0;
+    font-size: 1.5em;
+    font-weight: bold;
+    min-height: 40px;
+    color: #333;
+}
+
+.message.win {
+    color: #27ae60;
+}
+
+.message.lose {
+    color: #e74c3c;
+}
+
+.message.tie {
+    color: #f39c12;
+}
+
+.reset-btn {
+    padding: 12px 30px;
+    font-size: 1.1em;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    font-weight: bold;
+}
+
+.reset-btn:hover {
+    transform: scale(1.05);
+}
+
+.reset-btn:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 600px) {
+    .board {
+        grid-template-columns: repeat(3, 90px);
+    }
+
+    .cell {
+        width: 90px;
+        height: 90px;
+        font-size: 2.5em;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+}
