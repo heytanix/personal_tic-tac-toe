@@ -1,152 +1,385 @@
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Starfield Background */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Multiple layers of stars for depth */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 
+        100px 200px white, 300px 100px white, 500px 300px white, 
+        700px 150px white, 200px 400px white, 600px 500px white,
+        800px 250px white, 400px 450px white, 900px 100px white,
+        150px 150px white, 450px 250px white, 750px 450px white,
+        50px 500px white, 950px 350px white, 250px 50px white,
+        550px 550px white, 350px 350px white, 650px 200px white,
+        850px 400px white, 1000px 50px white, 1100px 300px white,
+        1200px 150px white, 1300px 450px white, 1400px 250px white,
+        120px 320px white, 420px 120px white, 720px 520px white,
+        180px 280px white, 480px 180px white, 780px 380px white,
+        1500px 100px white, 1600px 400px white, 1700px 200px white,
+        320px 220px white, 520px 420px white, 820px 320px white,
+        220px 520px white, 620px 120px white, 920px 220px white,
+        1800px 350px white, 1900px 450px white, 80px 80px white;
+    animation: twinkle 3s infinite;
+}
+
+body::after {
+    opacity: 0.5;
+    animation-delay: 1.5s;
+    box-shadow: 
+        150px 250px white, 350px 150px white, 550px 350px white, 
+        750px 200px white, 250px 450px white, 650px 550px white,
+        850px 300px white, 450px 500px white, 950px 150px white,
+        200px 200px white, 500px 300px white, 800px 500px white,
+        100px 550px white, 1000px 400px white, 300px 100px white,
+        600px 600px white, 400px 400px white, 700px 250px white,
+        900px 450px white, 1050px 100px white, 1150px 350px white,
+        1250px 200px white, 1350px 500px white, 1450px 300px white,
+        170px 370px white, 470px 170px white, 770px 570px white,
+        230px 330px white, 530px 230px white, 830px 430px white,
+        1550px 150px white, 1650px 450px white, 1750px 250px white,
+        370px 270px white, 570px 470px white, 870px 370px white,
+        270px 570px white, 670px 170px white, 970px 270px white,
+        1850px 400px white, 130px 130px white, 1950px 500px white;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
 }
 
 .container {
     text-align: center;
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 
+        0 8px 32px 0 rgba(31, 38, 135, 0.37),
+        inset 0 0 30px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    position: relative;
+    z-index: 1;
 }
 
 h1 {
-    color: #333;
+    color: #fff;
     margin-bottom: 10px;
-    font-size: 2.5em;
+    font-size: 3em;
+    text-shadow: 
+        0 0 10px rgba(0, 255, 255, 0.8),
+        0 0 20px rgba(0, 255, 255, 0.6),
+        0 0 30px rgba(0, 255, 255, 0.4);
+    letter-spacing: 3px;
+    font-weight: 700;
 }
 
 .player-info {
-    color: #666;
-    margin-bottom: 20px;
-    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 30px;
+    font-size: 1.2em;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .player-x {
-    color: #3498db;
+    color: #00ffff;
     font-weight: bold;
+    text-shadow: 0 0 10px #00ffff;
 }
 
 .player-o {
-    color: #e74c3c;
+    color: #ff00ff;
     font-weight: bold;
+    text-shadow: 0 0 10px #ff00ff;
 }
 
 .board {
     display: grid;
-    grid-template-columns: repeat(3, 120px);
-    grid-gap: 10px;
-    margin: 20px auto;
+    grid-template-columns: repeat(3, 130px);
+    grid-gap: 15px;
+    margin: 30px auto;
     width: fit-content;
+    perspective: 1000px;
 }
 
 .cell {
-    width: 120px;
-    height: 120px;
-    background: #f8f9fa;
-    border: 3px solid #e0e0e0;
-    border-radius: 10px;
+    width: 130px;
+    height: 130px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3em;
+    font-size: 4em;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    backdrop-filter: blur(5px);
 }
 
 .cell:hover {
-    background: #e8e9ea;
-    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 10px 30px rgba(0, 255, 255, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+    border-color: rgba(0, 255, 255, 0.5);
 }
 
 .cell.x {
-    color: #3498db;
+    color: #00ffff;
+    text-shadow: 
+        0 0 20px #00ffff,
+        0 0 40px #00ffff,
+        0 0 60px #00ffff,
+        0 0 80px #00ffff;
+    animation: floatX 3s ease-in-out infinite;
 }
 
 .cell.o {
-    color: #e74c3c;
+    color: #ff00ff;
+    text-shadow: 
+        0 0 20px #ff00ff,
+        0 0 40px #ff00ff,
+        0 0 60px #ff00ff,
+        0 0 80px #ff00ff;
+    animation: floatO 3s ease-in-out infinite;
+}
+
+/* Floating animations with different timing for variety */
+@keyframes floatX {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-8px) rotate(2deg);
+    }
+    50% { 
+        transform: translateY(-15px) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-8px) rotate(-2deg);
+    }
+}
+
+@keyframes floatO {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg) scale(1);
+    }
+    33% {
+        transform: translateY(-10px) rotate(-3deg) scale(1.05);
+    }
+    66% { 
+        transform: translateY(-5px) rotate(3deg) scale(0.98);
+    }
 }
 
 .cell.winning {
-    background: #ffd700;
-    animation: pulse 0.5s ease-in-out;
+    background: rgba(255, 215, 0, 0.2);
+    border-color: #ffd700;
+    animation: cosmicPulse 0.8s ease-in-out infinite, floatWin 2s ease-in-out infinite;
+    box-shadow: 
+        0 0 30px rgba(255, 215, 0, 0.8),
+        0 0 60px rgba(255, 215, 0, 0.6),
+        inset 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+@keyframes cosmicPulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 
+            0 0 30px rgba(255, 215, 0, 0.8),
+            0 0 60px rgba(255, 215, 0, 0.6);
+    }
+    50% { 
+        transform: scale(1.08);
+        box-shadow: 
+            0 0 50px rgba(255, 215, 0, 1),
+            0 0 100px rgba(255, 215, 0, 0.8);
+    }
+}
+
+@keyframes floatWin {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
 }
 
 .cell.disabled {
     cursor: not-allowed;
-    opacity: 0.6;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    opacity: 0.5;
 }
 
 .message {
-    margin: 20px 0;
-    font-size: 1.5em;
+    margin: 25px 0;
+    font-size: 1.8em;
     font-weight: bold;
-    min-height: 40px;
-    color: #333;
+    min-height: 50px;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    letter-spacing: 2px;
 }
 
 .message.win {
-    color: #27ae60;
+    color: #00ff88;
+    text-shadow: 
+        0 0 10px #00ff88,
+        0 0 20px #00ff88,
+        0 0 30px #00ff88;
+    animation: messageGlow 1.5s ease-in-out infinite;
 }
 
 .message.lose {
-    color: #e74c3c;
+    color: #ff0055;
+    text-shadow: 
+        0 0 10px #ff0055,
+        0 0 20px #ff0055,
+        0 0 30px #ff0055;
+    animation: messageGlow 1.5s ease-in-out infinite;
 }
 
 .message.tie {
-    color: #f39c12;
+    color: #ffaa00;
+    text-shadow: 
+        0 0 10px #ffaa00,
+        0 0 20px #ffaa00,
+        0 0 30px #ffaa00;
+    animation: messageGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes messageGlow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
 }
 
 .reset-btn {
-    padding: 12px 30px;
-    font-size: 1.1em;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 15px 40px;
+    font-size: 1.2em;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.3) 0%, rgba(255, 0, 255, 0.3) 100%);
     color: white;
-    border: none;
-    border-radius: 25px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: all 0.3s ease;
     font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    position: relative;
+    overflow: hidden;
+}
+
+.reset-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.reset-btn:hover::before {
+    width: 300px;
+    height: 300px;
 }
 
 .reset-btn:hover {
     transform: scale(1.05);
+    border-color: rgba(0, 255, 255, 0.8);
+    box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.6),
+        0 0 40px rgba(255, 0, 255, 0.4);
 }
 
 .reset-btn:active {
-    transform: scale(0.95);
+    transform: scale(0.98);
 }
 
+/* Shooting stars */
+@keyframes shootingStar {
+    0% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-500px) translateY(500px);
+        opacity: 0;
+    }
+}
+
+/* Responsive Design */
 @media (max-width: 600px) {
     .board {
-        grid-template-columns: repeat(3, 90px);
+        grid-template-columns: repeat(3, 100px);
+        grid-gap: 12px;
     }
 
     .cell {
-        width: 90px;
-        height: 90px;
+        width: 100px;
+        height: 100px;
+        font-size: 3em;
+    }
+
+    h1 {
+        font-size: 2.2em;
+    }
+
+    .container {
+        padding: 30px;
+    }
+
+    .message {
+        font-size: 1.4em;
+    }
+}
+
+@media (max-width: 400px) {
+    .board {
+        grid-template-columns: repeat(3, 85px);
+        grid-gap: 10px;
+    }
+
+    .cell {
+        width: 85px;
+        height: 85px;
         font-size: 2.5em;
     }
 
     h1 {
-        font-size: 2em;
+        font-size: 1.8em;
     }
 }
