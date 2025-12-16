@@ -1,4 +1,4 @@
-# ✨ Cosmic Tic-Tac-Toe
+# ✨ Cosmic Tic Tac Toe
 
 <div align="center">
 
