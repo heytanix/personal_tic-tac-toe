@@ -15,7 +15,7 @@
 
 ---
 
-## 🌌 What Makes This Special?
+## 🌌 Speciality:
 
 This isn't your ordinary Tic-Tac-Toe! Blast off into space with:
 
