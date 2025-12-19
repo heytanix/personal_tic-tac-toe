@@ -24,7 +24,7 @@ This isn't your ordinary Tic-Tac-Toe! Blast off into space with:
 - **🤖 Unbeatable AI** - Powered by minimax algorithm for optimal gameplay
 - **🎨 Premium Aesthetics** - Vibrant gradients, smooth animations, and dynamic effects
 - **📱 Fully Responsive** - Play on any device, from mobile to desktop
-- **⚡ Lightning Fast** - Real-time gameplay with instant responses
+- **⚡ Lightning Fast** - Rea time gameplay with instant responses
 
 ---
 
